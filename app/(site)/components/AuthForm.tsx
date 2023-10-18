@@ -1,11 +1,13 @@
 'use client';
 
+import axios from "axios";
 import Button from "@/app/components/Button";
 import Input from "@/app/components/input/Input";
 import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import AuthSocialButton from "./AuthSocialButton";
 import {BsGithub, BsGoogle} from 'react-icons/bs';
+import toast from "react-hot-toast";
 
 
 type Variant = 'LOGIN' | 'REGISTER';
@@ -42,6 +44,9 @@ const AuthForm = () => {
 
         if(variant === 'REGISTER') {
             // AXIOS Register
+            axios.post('/api/register', data)
+            .catch(()=> toast.error('Something went wrong!'))
+            .finally(()=> setIsLoading(false));
         }
 
         if(variant === 'REGISTER') {
