@@ -7,7 +7,6 @@ import useConversation from '@/app/hooks/useConversation';
 import { FullConversationType } from '@/app/types';
 import { MdOutlineGroupAdd } from 'react-icons/md';
 import ConversationBox from './ConversationBox';
-import { it } from 'node:test';
 
 interface ConversationListProps {
   initialItems: FullConversationType[];
