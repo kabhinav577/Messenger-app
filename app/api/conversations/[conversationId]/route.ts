@@ -42,7 +42,7 @@ export async function DELETE(
 
     return NextResponse.json(deletedConversation);
   } catch (error: any) {
-    console.log(error, 'ERROR_CONVVERSATION_DELETE');
+    console.log(error, 'ERROR_CONVERSATION_DELETE');
     return new NextResponse('Internal Error', { status: 500 });
   }
 }
