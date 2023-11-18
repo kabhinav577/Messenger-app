@@ -22,7 +22,7 @@ const AuthForm = () => {
   // Checking Session Status
   useEffect(() => {
     if (session?.status === 'authenticated') {
-      router.push('/users');
+      router.push('/conversations');
     }
   }, [session?.status, router]);
 
@@ -54,7 +54,15 @@ const AuthForm = () => {
       // AXIOS Register
       axios
         .post('/api/register', data)
-        .then(() => signIn('credentials', data))
+        .then(() => signIn('credentials', { ...data, redirect: false }))
+        .then((cb) => {
+          if (cb?.error) {
+            toast.error('Invalid Credentials!🥺');
+          }
+          if (cb?.ok) {
+            router.push('/conversations');
+          }
+        })
         .catch(() => toast.error('Something went wrong!'))
         .finally(() => setIsLoading(false));
     }
@@ -92,6 +100,7 @@ const AuthForm = () => {
 
         if (callback?.ok && !callback?.error) {
           toast.success('Logged In!');
+          router.push('/users');
         }
       })
       .finally(() => setIsLoading(false));

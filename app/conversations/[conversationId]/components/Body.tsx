@@ -43,6 +43,7 @@ const Body: React.FC<BodyProps> = ({ initialMessages = [] }) => {
     };
 
     const updateMessageHandler = (newMessage: FullMessageType) => {
+      axios.post(`/api/conversations/${conversationId}/seen`);
       setMessages((currrent) =>
         currrent.map((currrentMessage) => {
           if (currrentMessage.id === newMessage.id) {
